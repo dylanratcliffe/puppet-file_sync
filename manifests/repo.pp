@@ -14,26 +14,20 @@
 # @param submodules_dir The relative path within the repository's working tree where submodules will be added. This key is only necessary if submodules are desired for a particular repo, and should only appear when running the storage service.
 # @param confdir Location of the file-sync config file
 define file_sync::repo (
-  Stdlib::Absolutepath           $staging_dir,
-  Stdlib::Absolutepath           $live_dir,
-  String                         $staging_dir_owner = 'pe-puppet',
-  String                         $staging_dir_group = 'pe-puppet',
-  String                         $staging_dir_mode  = '0755',
-  String                         $live_dir_owner    = 'pe-puppet',
-  String                         $live_dir_group    = 'pe-puppet',
-  String                         $live_dir_mode     = '0755',
-  Optional[Boolean]              $auto_commit       = false,
-  Optional[Boolean]              $client_active     = true,
-  Optional[Boolean]              $honor_gitignore   = false,
-  Optional[String]               $submodules_dir    = undef,
-  Optional[Stdlib::Absolutepath] $confdir           = undef,
-) inherits ::puppet_enterprise::master::file_sync {
-
-  $_confdir = $confdir ? {
-    undef   => $::puppet_enterprise::master::file_sync::confdir,
-    default => $confdir,
-  }
-
+  Stdlib::Absolutepath $staging_dir,
+  Stdlib::Absolutepath $live_dir,
+  String               $staging_dir_owner = 'pe-puppet',
+  String               $staging_dir_group = 'pe-puppet',
+  String               $staging_dir_mode  = '0755',
+  String               $live_dir_owner    = 'pe-puppet',
+  String               $live_dir_group    = 'pe-puppet',
+  String               $live_dir_mode     = '0755',
+  Optional[Boolean]    $auto_commit       = false,
+  Optional[Boolean]    $client_active     = true,
+  Optional[Boolean]    $honor_gitignore   = false,
+  Optional[String]     $submodules_dir    = undef,
+  Stdlib::Absolutepath $confdir           = '/etc/puppetlabs/puppetserver',
+) {
   file { $staging_dir:
     ensure => directory,
     owner  => $staging_dir_owner,
@@ -50,7 +44,7 @@ define file_sync::repo (
 
   if ($staging_dir and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $staging_dir,
       notify => Serice['pe-puppetserver'],
     }
@@ -58,7 +52,7 @@ define file_sync::repo (
 
   if ($auto_commit and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $auto_commit,
       notify => Serice['pe-puppetserver'],
     }
@@ -66,7 +60,7 @@ define file_sync::repo (
 
   if ($client_active and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.client-active":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $client_active,
       notify => Serice['pe-puppetserver'],
     }
@@ -74,7 +68,7 @@ define file_sync::repo (
 
   if ($honor_gitignore and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.honor-gitignore":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $honor_gitignore,
       notify => Serice['pe-puppetserver'],
     }
@@ -82,7 +76,7 @@ define file_sync::repo (
 
   if ($submodules_dir and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.submodules-dir":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $submodules_dir,
       notify => Serice['pe-puppetserver'],
     }
@@ -90,7 +84,7 @@ define file_sync::repo (
 
   if $live_dir {
     pe_hocon_setting { "file-sync.repos.${title}.live-dir":
-      path   => "${_confdir}/conf.d/file-sync.conf",
+      path   => "${confdir}/conf.d/file-sync.conf",
       value  => $live_dir,
       notify => Serice['pe-puppetserver'],
     }
