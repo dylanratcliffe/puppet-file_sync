@@ -44,49 +44,55 @@ define file_sync::repo (
 
   if ($staging_dir and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.staging-dir":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $staging_dir,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $staging_dir,
+      setting => "file-sync.repos.${title}.staging-dir",
+      notify  => Service['pe-puppetserver'],
     }
   }
 
   if ($auto_commit and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $auto_commit,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $auto_commit,
+      setting => "file-sync.repos.${title}.auto-commit",
+      notify  => Service['pe-puppetserver'],
     }
   }
 
   if ($client_active and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.client-active":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $client_active,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $client_active,
+      setting => "file-sync.repos.${title}.client-active",
+      notify  => Service['pe-puppetserver'],
     }
   }
 
   if ($honor_gitignore and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.honor-gitignore":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $honor_gitignore,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $honor_gitignore,
+      setting => "file-sync.repos.${title}.honor-gitignore",
+      notify  => Service['pe-puppetserver'],
     }
   }
 
   if ($submodules_dir and !(pe_compile_master())) {
     pe_hocon_setting { "file-sync.repos.${title}.submodules-dir":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $submodules_dir,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $submodules_dir,
+      setting => "file-sync.repos.${title}.submodules-dir",
+      notify  => Service['pe-puppetserver'],
     }
   }
 
   if $live_dir {
     pe_hocon_setting { "file-sync.repos.${title}.live-dir":
-      path   => "${confdir}/conf.d/file-sync.conf",
-      value  => $live_dir,
-      notify => Service['pe-puppetserver'],
+      path    => "${confdir}/conf.d/file-sync.conf",
+      value   => $live_dir,
+      setting => "file-sync.repos.${title}.live-dir",
+      notify  => Service['pe-puppetserver'],
     }
   }
 }
