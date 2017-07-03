@@ -43,7 +43,7 @@ define file_sync::repo (
   }
 
   if ($staging_dir and !(pe_compile_master())) {
-    pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
+    pe_hocon_setting { "file-sync.repos.${title}.staging-dir":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $staging_dir,
       notify => Service['pe-puppetserver'],
