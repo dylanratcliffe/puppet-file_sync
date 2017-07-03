@@ -27,9 +27,7 @@ define file_sync::repo (
   Optional[Boolean]              $honor_gitignore   = false,
   Optional[String]               $submodules_dir    = undef,
   Optional[Stdlib::Absolutepath] $confdir           = undef,
-) {
-  # Make sure we have evaluated this!
-  include ::puppet_enterprise::master::file_sync
+) inherits ::puppet_enterprise::master::file_sync {
 
   $_confdir = $confdir ? {
     undef   => $::puppet_enterprise::master::file_sync::confdir,
