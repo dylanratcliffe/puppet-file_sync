@@ -46,7 +46,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $staging_dir,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 
@@ -54,7 +54,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.auto-commit":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $auto_commit,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 
@@ -62,7 +62,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.client-active":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $client_active,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 
@@ -70,7 +70,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.honor-gitignore":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $honor_gitignore,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 
@@ -78,7 +78,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.submodules-dir":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $submodules_dir,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 
@@ -86,7 +86,7 @@ define file_sync::repo (
     pe_hocon_setting { "file-sync.repos.${title}.live-dir":
       path   => "${confdir}/conf.d/file-sync.conf",
       value  => $live_dir,
-      notify => Serice['pe-puppetserver'],
+      notify => Service['pe-puppetserver'],
     }
   }
 }
