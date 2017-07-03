@@ -1,0 +1,46 @@
+{
+  "name": "dylanratcliffe-file_sync",
+  "version": "0.1.0",
+  "author": "dylanratcliffe",
+  "summary": "Sync custom directories with PE File Sync",
+  "license": "Apache-2.0",
+  "source": "https://github.com/dylanratcliffe/puppet-file_sync",
+  "project_page": "https://github.com/dylanratcliffe/puppet-file_sync",
+  "issues_url": "https://github.com/dylanratcliffe/puppet-file_sync/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.13.1 < 5.0.0"
+    }
+  ],
+  "data_provider": null,
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7.0"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
+      ]
+    },
+    {
+      "operatingsystem": "Windows",
+      "operatingsystemrelease": [
+        "2016"
+      ]
+    }
+  ],
+  "pdk-version": "0.2.0",
+  "template-url": "https://github.com/puppetlabs/pdk-module-template",
+  "template-ref": "heads/master-0-g690dc7a"
+}
